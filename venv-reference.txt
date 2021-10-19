@@ -1,0 +1,23 @@
+
+To create the virtual environment:
+py -m venv .venv
+
+To start it:
+.\.venv\Scripts\activate
+
+
+to get out of it:
+deactivate
+
+
+to install from requirements.txt:
+pip install -r requirements.txt
+
+
+to store installation into requirements.txt:
+pip freeze > requirements
+
+
+To run tests:
+pytest
+
