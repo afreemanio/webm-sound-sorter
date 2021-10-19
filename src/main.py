@@ -28,7 +28,11 @@ def main():
     print("hello world")
     folder_to_check = os.getcwd()
     # get_files_in_folder(folder_to_check + "/videos/dataset/*.webm")
-    get_webms_in_folder(folder_to_check + "/videos/dataset")
+    webms = get_webms_in_folder(folder_to_check + "/videos/dataset")
+    current = 0
+    while current < len(webms):
+        current_has_sound = does_webm_have_sound(webms[current])
+        current += 1
 
 
 def get_files_in_folder(path):
@@ -44,6 +48,19 @@ def get_webms_in_folder(path):
     files = glob.glob(files_path)
     logger.info(files)
     return files
+
+
+# Returns boolean
+def does_webm_have_sound(webm_path):
+    has_audio = ffmpeg.probe(webm_path, select_streams='a');
+    if has_audio['streams']:
+        logger.info(webm_path + " has audio")
+        return True
+    else:
+        logger.info(webm_path + " has no audio")
+        return False
+
+
 
 
 
