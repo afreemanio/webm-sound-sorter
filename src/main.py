@@ -27,7 +27,8 @@ def sum_of_two_numbers(x, y):
 def main():
     print("hello world")
     folder_to_check = os.getcwd()
-    get_files_in_folder(folder_to_check + "/videos/dataset/*.webm")
+    # get_files_in_folder(folder_to_check + "/videos/dataset/*.webm")
+    get_webms_in_folder(folder_to_check + "/videos/dataset")
 
 
 def get_files_in_folder(path):
@@ -36,6 +37,13 @@ def get_files_in_folder(path):
     logger.info(files)
     return files
 
+
+def get_webms_in_folder(path):
+    files_path = os.path.join(path, "*.webm")
+    logger.info("globbing " + str(files_path))
+    files = glob.glob(files_path)
+    logger.info(files)
+    return files
 
 
 
