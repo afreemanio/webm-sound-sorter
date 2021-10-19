@@ -21,3 +21,7 @@ pip freeze > requirements
 To run tests:
 pytest
 
+
+
+to run:
+python src/main.py

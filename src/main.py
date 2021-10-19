@@ -11,6 +11,8 @@ import ffmpeg
 import glob
 import os
 from logzero import logger
+import argparse
+
 
 def sum_of_two_numbers(x, y):
     return x + y - y + y
@@ -24,11 +26,11 @@ def sum_of_two_numbers(x, y):
 # 4. If it has sound, move it to a new folder (webm_with_sound)
 
 
-def main():
+def main(args):
     print("hello world")
     folder_to_check = os.getcwd()
-    # get_files_in_folder(folder_to_check + "/videos/dataset/*.webm")
-    webms = get_webms_in_folder(folder_to_check + "/videos/dataset")
+
+    webms = get_webms_in_folder(args.path)
     current = 0
     while current < len(webms):
         current_has_sound = does_webm_have_sound(webms[current])
@@ -63,8 +65,26 @@ def does_webm_have_sound(webm_path):
 
 
 
+def dir_path(string):
+    if os.path.isdir(string):
+        return string
+    else:
+        raise NotADirectoryError(string)
 
 
 if __name__ == "__main__":
-    # This is executed when run from the command line
-    main()
+    """ This is executed when run from the command line """
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("path", help="Required positional argument", type=dir_path)
+
+    # # Optional verbosity counter (eg. -v, -vv, -vvv, etc.)
+    # parser.add_argument(
+    #     "-v",
+    #     "--verbose",
+    #     action="count",
+    #     default=0,
+    #     help="Verbosity (-v, -vv, etc)")
+
+    args = parser.parse_args()
+    main(args)
